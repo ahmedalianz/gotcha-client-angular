@@ -1,0 +1,107 @@
+.nav-categories {
+  background-color: rgb(235, 233, 233);
+  display: flex;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  ::-webkit-scrollbar {
+    height: 0.3rem;
+  }
+  &-all-categories {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    border-right: 1px solid rgb(196, 196, 196);
+    border-bottom: 1px solid rgb(196, 196, 196);
+
+    min-width: fit-content;
+    cursor: pointer;
+    .title {
+      text-transform: uppercase;
+      color: var(--main);
+    }
+    padding: 0.8rem;
+    @media (screen-width: 1024px) {
+      padding: 1rem 3rem;
+    }
+    .menu {
+      position: absolute;
+      display: none;
+      bottom: 0;
+      left: 0;
+      width: max-content;
+
+      z-index: 2;
+      background-color: rgb(235, 233, 233);
+      border-radius: 4px;
+      .left {
+        display: flex;
+        flex-direction: column;
+        padding: 0.7rem;
+        border-top: 1px solid rgb(196, 196, 196);
+        height: 72vh;
+        overflow: scroll;
+      }
+      .right {
+        display: flex;
+        background-color: #fffefe;
+        min-width: 300px;
+        .column {
+          display: flex;
+          flex-direction: column;
+          padding: 0.7rem;
+          span {
+            display: flex;
+            align-items: center;
+          }
+          img {
+            margin-right: 0.5rem;
+            width: 25px;
+            height: 25px;
+            object-fit: contain;
+          }
+        }
+      }
+      span {
+        padding: 0.8rem 1.2rem;
+        min-width: fit-content;
+        text-transform: capitalize;
+        cursor: pointer;
+        border-radius: 2px;
+        @media (screen-width: 1024px) {
+          padding: 1rem 3rem;
+        }
+        &:hover {
+          color: var(--main);
+        }
+      }
+    }
+    &:hover {
+      .menu {
+        display: flex;
+        transform: translateY(100%);
+      }
+    }
+  }
+  &-list {
+    display: flex;
+    text-transform: uppercase;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    span {
+      padding: 0.8rem 1.2rem;
+      min-width: fit-content;
+      cursor: pointer;
+      border-radius: 2px;
+      @media (screen-width: 1024px) {
+        padding: 1rem 3rem;
+      }
+      &:last-child {
+        color: red;
+      }
+      &:hover {
+        background-color: #fff;
+        box-shadow: #00000044 1px 1px 10px;
+      }
+    }
+  }
+}

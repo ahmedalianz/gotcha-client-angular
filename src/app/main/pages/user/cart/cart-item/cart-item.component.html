@@ -1,0 +1,57 @@
+<li>
+  <div class="left">
+    <div class="thumbnail">
+      <img [src]="apiURL + cartItem.product?.mainImage" alt="product name" />
+    </div>
+    <div class="detail">
+      <div class="name">
+        <a routerLink="/products/{{ cartItem.product?._id }}">{{
+          cartItem.product?.shortName
+        }}</a>
+      </div>
+      <div class="cart-options">
+        <div class="cart-option">
+          <mat-icon class="main-color">paid</mat-icon
+          ><span class="value"> {{ cartItem.price | currency: " " }} L.E </span>
+        </div>
+        <div class="cart-option" *ngIf="cartItem.color">
+          <mat-icon class="main-color">palette</mat-icon>
+          <span class="value"
+            ><div class="color" [style.backgroundColor]="cartItem.color"></div
+          ></span>
+        </div>
+        <div class="cart-option" *ngIf="cartItem.size">
+          <mat-icon class="main-color">straighten</mat-icon>
+          <span class="value">
+            {{ cartItem.size }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="quantity">
+      <input
+        type="number"
+        class="quantity"
+        [value]="quantity"
+        [max]="cartItem.product?.inventoryQuantity"
+        min="1"
+        (blur)="checkQuantity()"
+        (change)="onChangeQunatity($event)"
+      />
+      <button
+        [class]="editConfirm"
+        (click)="editCartItem()"
+        [disabled]="confirmTxt === 'Confirming'"
+      >
+        {{ confirmTxt }}
+      </button>
+    </div>
+
+    <div class="remove">
+      <mat-icon class="close-icon" (click)="removeCartItem()">close</mat-icon>
+    </div>
+  </div>
+</li>

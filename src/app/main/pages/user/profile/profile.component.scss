@@ -1,0 +1,25 @@
+.user-profile {
+  max-width: 1200px;
+  min-width: 300px;
+  margin: 0 auto;
+  height: 100%;
+  .profile-container {
+    position: relative;
+    min-height: 400px;
+    .form-group-2 {
+      display: flex;
+      flex-wrap: wrap;
+      .mat-form-field {
+        width: 300px;
+        margin-right: 20px;
+        .error {
+          bottom: -20px;
+          left: 0;
+          color: red;
+          font-size: 0.7rem;
+          position: absolute;
+        }
+      }
+    }
+  }
+}

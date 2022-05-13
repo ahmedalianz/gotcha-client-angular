@@ -1,0 +1,46 @@
+<section
+  class="products-container"
+  *ngIf="_orders.ordersLoaded; else elseBlock"
+>
+  <mat-card class="cart-container">
+    <div *ngIf="_orders.orders.length > 0" class="card-back"></div>
+    <div *ngIf="_orders.orders.length === 0" class="card-back-empty"></div>
+    <div class="container">
+      <!-- Header -->
+      <header>
+        <h1>Your Orders</h1>
+        <span class="count"
+          >View your order history and check the delivery status for items
+        </span>
+      </header>
+
+      <!-- Order List -->
+      <section>
+        <div *ngIf="_orders.orders.length > 0; else elseBlock2">
+          <ul class="products">
+            <app-order-item
+              [orderItem]="orderItem"
+              [i]="i"
+              *ngFor="let orderItem of _orders.orders; let i = index"
+            ></app-order-item>
+          </ul>
+        </div>
+        <ng-template #elseBlock2>
+          <div v-else class="empty-product">
+            <button routerLink="/" class="btn">Back To Shopping</button>
+          </div>
+        </ng-template>
+      </section>
+    </div>
+  </mat-card>
+  <ng-template #elseBlock2>
+    <div class="emptycart">
+      <img src="assets/images/cartempty.png" alt="empty cart" />
+    </div>
+  </ng-template>
+</section>
+<ng-template #elseBlock>
+  <div class="spinner-box">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

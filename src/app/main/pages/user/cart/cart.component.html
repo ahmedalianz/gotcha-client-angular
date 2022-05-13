@@ -1,0 +1,126 @@
+<section class="products-container" *ngIf="_cart.cartLoaded; else elseBlock">
+  <mat-card class="cart-container">
+    <div *ngIf="_cart.cartData.length > 0" class="card-back"></div>
+    <div *ngIf="_cart.cartData.length === 0" class="card-back-empty"></div>
+    <div class="container">
+      <!-- Header -->
+      <header>
+        <h1>Your Cart</h1>
+        <span class="count" *ngIf="_cart.cartData.length > 0"
+          >{{ _cart.cartData.length }}
+          {{ _cart.cartData.length === 1 ? "item" : "items" }} in the Your
+          Cart</span
+        >
+      </header>
+
+      <!-- Product List -->
+      <section>
+        <div *ngIf="_cart.cartData.length > 0; else elseBlock2">
+          <ul class="products">
+            <app-cart-item
+              [cartItem]="cartItem"
+              [i]="i"
+              *ngFor="let cartItem of _cart.cartData; let i = index"
+            ></app-cart-item>
+          </ul>
+        </div>
+        <ng-template #elseBlock2>
+          <div v-else class="empty-product">
+            <button routerLink="/" class="btn">Back To Shopping</button>
+          </div>
+        </ng-template>
+      </section>
+
+      <!-- promotion -->
+      <section *ngIf="_cart.cartData.length > 0">
+        <div class="promotion">
+          <label for="promo-code">Have A Promo Code?</label>
+          <div class="promotion-button-container">
+            <input type="text" />
+            <button type="button" class="btn">Apply</button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div>
+      <div class="payment" *ngIf="_cart.cartData.length > 0">
+        <div class="payment__header">
+          <div class="payment__logo-wrapper">
+            <img
+              src="/assets/images/logo/Gotcha.png"
+              alt="logo"
+              class="payment__logo"
+            />
+          </div>
+
+          <div class="payment__header-info">
+            <span class="payment__date">{{ date | date }}</span>
+            <span class="payment__ref">GOTCHA PAYMENT</span>
+          </div>
+        </div>
+
+        <div class="payment__subheader-wrapper">
+          <div class="payment__subheader">
+            <h1 class="payment__username">Hi Ahmed,</h1>
+            <span class="payment__help-text"
+              >You're Going To purchase ({{ _cart.cartData.length }})
+              {{ _cart.cartData.length === 1 ? "item" : "items" }}</span
+            >
+          </div>
+        </div>
+
+        <div class="payment__cart">
+          <ul class="payment__cart-list">
+            <li
+              class="payment__cart-item"
+              *ngFor="let cartItem of _cart.cartData; let i = index"
+            >
+              <div>
+                <span class="payment__index">{{ cartItem.quantity }}</span>
+                <span class="payment__item-name">{{
+                  cartItem.product?.shortName
+                }}</span>
+              </div>
+              <span class="payment__item-price"
+                >{{
+                  cartItem.price * cartItem.quantity | currency: " "
+                }}
+                L.E</span
+              >
+            </li>
+
+            <li class="payment__cart-item">
+              <span class="payment__cart-total">Total</span>
+              <span class="payment__item-price"
+                >{{ _cart.totalPrice | currency: " " }} L.E</span
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="payment__footer">
+          <img
+            src="https://i.ibb.co/c8CQvBq/barcode.png"
+            alt="Payment Barcode"
+            class="payment__barcode"
+          />
+        </div>
+      </div>
+
+      <div class="checkout" *ngIf="_cart.cartData.length > 0">
+        <button (click)="placeOrder()" class="btn">Check Out</button>
+      </div>
+    </div>
+    //TODO:Checkout options //TODO:decrease stock
+  </mat-card>
+  <ng-template #elseBlock2>
+    <div class="emptycart">
+      <img src="assets/images/cartempty.png" alt="empty cart" />
+    </div>
+  </ng-template>
+</section>
+<ng-template #elseBlock>
+  <div class="spinner-box">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

@@ -1,0 +1,56 @@
+.sidebar {
+  .sidebar_user_info {
+    padding: 20px;
+
+    .user_profle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      .user_img {
+        img {
+          width: 150px;
+          height: 150px;
+          object-fit: cover;
+          object-position: center;
+          border-radius: 50%;
+          border: #1176b1 4px solid;
+        }
+      }
+      .user_info {
+        display: flex;
+        align-items: center;
+        h2 {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .upload-container {
+      .upload-button {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        border-radius: 5px;
+      }
+      input {
+        display: none;
+      }
+    }
+  }
+  .list {
+    .listitem {
+      color: #fff;
+
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      span {
+        margin-left: 1rem;
+      }
+      &:hover {
+        background: var(--lightmain);
+      }
+    }
+  }
+}

@@ -1,0 +1,86 @@
+.products-container {
+  width: 80vw;
+  max-width: 1200px;
+  margin-top: 50px;
+  min-width: 300px;
+  .mat-toolbar-row,
+  .mat-toolbar-single-row {
+    height: auto;
+    min-height: 60px;
+  }
+  .pagination {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    button {
+      margin: 0 0.5rem;
+    }
+  }
+  .tool-bar {
+    display: flex;
+    flex-direction: column;
+    @media (min-width: 670px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .buttons-box {
+      display: flex;
+      flex-direction: column;
+      button {
+        margin: 5px;
+      }
+      @media (min-width: 670px) {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+  }
+  .table-container {
+    overflow-x: scroll;
+    padding: 0.5rem;
+    .table {
+      width: 100%;
+      min-width: 500px;
+      margin: 1rem auto;
+      img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+      }
+      td,
+      th {
+        vertical-align: middle;
+      }
+    }
+  }
+  .categories-container {
+    .category {
+      display: flex;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #aaa;
+      &:hover {
+        background-color: rgb(246, 246, 246);
+      }
+      &-name {
+        padding: 0.5rem;
+        width: 14%;
+        border-right: 1px solid #aaa;
+      }
+      .category-sub-categories {
+        padding: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        width: 80%;
+        span {
+          margin: 0.5rem;
+        }
+      }
+      .actions {
+        width: 6%;
+        .mat-icon {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

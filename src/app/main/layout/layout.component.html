@@ -1,0 +1,10 @@
+<main *ngIf="!_user.userDataLoading; else elseBlock">
+  <app-navbar></app-navbar>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</main>
+<ng-template #elseBlock>
+  <div class="spinner-box">
+    <img src="/assets/images/loading.gif" alt="" />
+  </div>
+</ng-template>

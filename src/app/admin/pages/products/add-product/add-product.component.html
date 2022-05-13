@@ -1,0 +1,281 @@
+<mat-card class="add-product-container">
+  <h1>Create New Product</h1>
+  <form [formGroup]="newProductForm" (ngSubmit)="addProduct()">
+    <div class="form-group-3">
+      <mat-form-field appearance="standard">
+        <mat-label>Short Name</mat-label>
+        <input
+          matInput
+          formControlName="shortName"
+          type="text"
+          maxlength="35"
+        />
+        <mat-error *ngIf="shortName?.errors?.['required']">
+          short Name is required
+        </mat-error>
+        <mat-error *ngIf="shortName?.errors?.['maxlength']">
+          maximum 35 chars exedded
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Brand</mat-label>
+        <input matInput formControlName="brand" type="text" />
+      </mat-form-field>
+      <div class="smalls">
+        <mat-form-field appearance="standard">
+          <mat-label>Price</mat-label>
+          <input matInput formControlName="price" type="number" />
+          <mat-error *ngIf="price?.errors?.['required']">
+            price is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Quantity</mat-label>
+          <input matInput formControlName="inventoryQuantity" type="number" />
+          <mat-error *ngIf="inventoryQuantity?.errors?.['required']">
+            inventory Quantity is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-form-field appearance="standard" [style.display]="'block'">
+      <mat-label>Long Name</mat-label>
+      <input matInput formControlName="longName" type="text" />
+      <mat-error *ngIf="longName?.errors?.['required']">
+        long Name is required
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-group-3">
+      <mat-form-field appearance="standard">
+        <mat-label>Main Category</mat-label>
+        <mat-select formControlName="main_category">
+          <mat-option
+            *ngFor="let mainCategory of categoryMainList; let i = index"
+            [value]="mainCategory.name"
+            (click)="setSubCategories()"
+            >{{ mainCategory.name }}</mat-option
+          >
+        </mat-select>
+        <mat-error *ngIf="main_category?.errors?.['required']">
+          Category is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field
+        appearance="standard"
+        [style.display]="main_category?.value ? 'inline-block' : 'none'"
+      >
+        <mat-label>Sub Category</mat-label>
+        <mat-select formArrayName="categories" multiple>
+          <mat-select-trigger>
+            {{ categories.value.length ? categories.value[0].name : "" }}
+            <span
+              *ngIf="categories.value?.length > 1"
+              class="additional-selection"
+            >
+              (+{{ categories.value.length - 1 }}
+              {{ categories.value?.length === 2 ? "other" : "others" }})
+            </span>
+          </mat-select-trigger>
+          <mat-option
+            *ngFor="let subCategory of categorySubList; let i = index"
+            [value]="subCategory"
+            (click)="addSubCategory(i)"
+            >{{ subCategory.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <div class="smalls">
+        <mat-form-field appearance="standard">
+          <mat-label>Sizes</mat-label>
+          <mat-select formArrayName="sizes" multiple>
+            <mat-select-trigger>
+              {{ sizes.value.length ? sizes.value[0] : "" }}
+              <span
+                *ngIf="sizes.value?.length > 1"
+                class="additional-selection"
+              >
+                (+{{ sizes.value.length - 1 }}
+                {{ sizes.value?.length === 2 ? "other" : "others" }})
+              </span>
+            </mat-select-trigger>
+            <mat-option
+              *ngFor="let size of sizesList; let i = index"
+              [value]="size"
+              (click)="addSize(i)"
+              >{{ size }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <ng-container formGroupName="discount">
+          <mat-form-field
+            appearance="standard"
+            [style.display]="active?.value ? 'inline-block' : 'none'"
+          >
+            <mat-label>Discount %</mat-label>
+            <input matInput formControlName="percentage" type="number" />
+          </mat-form-field>
+          <mat-slide-toggle
+            color="primary"
+            formControlName="active"
+            class="discount-toggle"
+          >
+            Discount</mat-slide-toggle
+          >
+        </ng-container>
+      </div>
+      <mat-slide-toggle
+        color="primary"
+        formControlName="bestSeller"
+        class="best-seller-toggle"
+      >
+        Best Seller</mat-slide-toggle
+      >
+      <mat-slide-toggle
+        color="primary"
+        formControlName="kidsSizes"
+        class="sizes-toggle"
+        (change)="setSizes($event)"
+      >
+        Kids' Sizes</mat-slide-toggle
+      >
+    </div>
+
+    <div [style.marginTop]="'15px'">
+      <mat-label>Description</mat-label>
+
+      <editor
+        formControlName="description"
+        apiKey="k5hsb3k05qkcj0f159ny1m2l94gpiq9xxm3ej6xre8jptha8"
+        [init]="{
+          height: 200,
+          menubar: false,
+          plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+          ],
+          toolbar:
+            'undo redo | formatselect | bold italic backcolor | \
+          alignleft aligncenter alignright alignjustify | \
+          bullist numlist outdent indent | removeformat | help'
+        }"
+      ></editor>
+    </div>
+    <div [style.marginTop]="'15px'">
+      <mat-label>Specifications</mat-label>
+      <editor
+        formControlName="specifications"
+        apiKey="k5hsb3k05qkcj0f159ny1m2l94gpiq9xxm3ej6xre8jptha8"
+        [init]="{
+          height: 200,
+          menubar: false,
+          plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+          ],
+          toolbar:
+            'undo redo | formatselect | bold italic backcolor | \
+          alignleft aligncenter alignright alignjustify | \
+          bullist numlist outdent indent | removeformat | help'
+        }"
+      ></editor>
+    </div>
+    <mat-card [style.marginTop]="'15px'" class="mat-elevation-z3">
+      <ng-container formArrayName="keywords">
+        <ng-container *ngFor="let keyword of keywords.controls; let i = index">
+          <mat-form-field appearance="standard">
+            <mat-label>KeyWord {{ i + 1 }}</mat-label>
+            <input
+              matInput
+              [formControlName]="i"
+              type="text"
+            /> </mat-form-field
+          ><button mat-mini-fab color="accent" (click)="removeKeyword(i)">
+            <mat-icon>remove</mat-icon>
+          </button></ng-container
+        >
+      </ng-container>
+      <button
+        mat-raised-button
+        type="button"
+        color="primary"
+        (click)="addKeyword()"
+      >
+        <mat-icon>add</mat-icon>
+        Add KeyWords
+      </button>
+    </mat-card>
+    <mat-card [style.marginTop]="'15px'" class="mat-elevation-z3">
+      <ng-container formArrayName="colors">
+        <ng-container *ngFor="let color of colors.controls; let i = index">
+          <mat-form-field appearance="standard" [style.width]="'50px'">
+            <mat-label>Color {{ i + 1 }}</mat-label>
+            <input matInput [formControlName]="i" type="color" />
+            <button mat-mini-fab color="accent" (click)="removeColor(i)">
+              <mat-icon>remove</mat-icon>
+            </button>
+          </mat-form-field> </ng-container
+        ><button
+          mat-raised-button
+          type="button"
+          color="primary"
+          (click)="addColor()"
+        >
+          <mat-icon>add</mat-icon>
+          Add color
+        </button>
+      </ng-container>
+    </mat-card>
+    <div class="uploads">
+      <mat-card class="upload mat-elevation-z3">
+        <div>Main Image</div>
+        <div>
+          <label for="file-upload-edit"
+            ><div class="upload-button">
+              <mat-icon>perm_media</mat-icon>
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              id="file-upload-edit"
+              (change)="onFileSelected($event)"
+            />
+          </label>
+        </div>
+        <div class="preview-container">
+          <img [src]="imageSrc" *ngIf="imageSrc" />
+        </div>
+      </mat-card>
+      <mat-card class="upload multi">
+        <div>Addetional Images</div>
+        <div>
+          <label for="multi-file-upload-edit"
+            ><div class="upload-button">
+              <mat-icon>perm_media</mat-icon>
+            </div>
+            <input
+              multiple
+              type="file"
+              accept="image/*"
+              id="multi-file-upload-edit"
+              (change)="onMultiFileSelected($event)"
+            />
+          </label>
+        </div>
+        <div class="preview-container" *ngIf="multiImageSrc">
+          <img *ngFor="let image of multiImageSrc" [src]="image" />
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="button-container">
+      <button mat-raised-button class="btn" [disabled]="isSubmitted">
+        Create
+      </button>
+    </div>
+  </form>
+</mat-card>

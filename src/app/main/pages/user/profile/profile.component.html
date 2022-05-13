@@ -1,0 +1,88 @@
+<section class="user-profile">
+  <mat-card class="profile-container">
+    <!-- Edit Profile Welcome Text -->
+    <div class="welcome-message">
+      <h2>Your profile</h2>
+      <p>Manage your details, view your tier status and change your password</p>
+    </div>
+    <!-- Edit Personal Info -->
+    <div class="personal-info">
+      <h3>Edit Personal Information</h3>
+      <form [formGroup]="profileForm" (ngSubmit)="handleEditProfile()">
+        <mat-card class="mat-elevation-z6">
+          <h2>General Info</h2>
+          <div class="form-group-2">
+            <mat-form-field appearance="fill">
+              <mat-label>Name</mat-label>
+              <input type="text" formControlName="name" matInput />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Phone</mat-label>
+              <span matPrefix>+2 &nbsp;</span>
+              <input type="tel" formControlName="phone" matInput />
+              <span *ngIf="phone?.errors?.['minlength']" class="error"
+                >not a valid phone</span
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="submitButton-container">
+            <button mat-raised-button class="btn" type="submit">
+              Save Changes
+            </button>
+          </div>
+        </mat-card>
+      </form>
+      <form
+        [style.marginTop]="'15px'"
+        [formGroup]="securityForm"
+        (ngSubmit)="handleEditPassword()"
+      >
+        <mat-card class="mat-elevation-z6">
+          <h2>Security</h2>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input
+              type="email"
+              [value]="_user.userData.email"
+              disabled
+              matInput
+            />
+          </mat-form-field>
+          <div class="form-group-2">
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input type="password" formControlName="password" matInput />
+              <span
+                *ngIf="isSubmittedEditPassword && !passwordMatch"
+                class="error"
+                >password does not match</span
+              >
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Confirm Password</mat-label>
+              <input
+                type="password"
+                formControlName="confirm_password"
+                matInput
+              />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>New Password</mat-label>
+              <input type="password" formControlName="new_password" matInput />
+            </mat-form-field>
+          </div>
+          <div class="server-err">
+            {{ serverErrMsg.password }}
+          </div>
+          <div class="submitButton-container">
+            <button mat-raised-button class="btn" type="submit">
+              Save Changes
+            </button>
+          </div>
+        </mat-card>
+      </form>
+    </div>
+  </mat-card>
+</section>

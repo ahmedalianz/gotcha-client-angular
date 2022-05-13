@@ -1,0 +1,52 @@
+.sign-up-container {
+  background: url("/assets/images/back1.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  form {
+    width: 80%;
+    padding: 0 1rem;
+    background-color: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(6px);
+    border-radius: 0.8rem;
+    box-shadow: rgba(0, 0, 0, 0.31) 1px 1px 10px;
+    .mat-form-field {
+      position: relative;
+      .error {
+        bottom: -20px;
+        left: 0;
+        color: red;
+        font-size: 0.7rem;
+        position: absolute;
+      }
+    }
+    .form-group-2 {
+      flex-direction: column;
+    }
+    .form-group-2,
+    .submitButton-container {
+      display: flex;
+    }
+    .submitButton-container {
+      justify-content: center;
+      button {
+        width: 40%;
+      }
+    }
+    .server-err {
+      color: red;
+      text-align: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 3rem;
+    form {
+      width: 30%;
+      max-width: 800px;
+      padding: 1rem;
+    }
+  }
+}

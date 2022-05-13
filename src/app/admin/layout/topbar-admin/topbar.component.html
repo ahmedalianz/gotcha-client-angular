@@ -1,0 +1,26 @@
+<mat-toolbar class="topbar">
+  <button type="button" mat-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+  <div class="buttons">
+    <button color="primary" mat-mini-fab>
+      <mat-icon matBadge="10" matBadgeColor="warn" matBadgePosition="after"
+        >mail</mat-icon
+      >
+    </button>
+    <button color="primary" mat-mini-fab>
+      <mat-icon matBadge="10" matBadgeColor="warn" matBadgePosition="after"
+        >notifications</mat-icon
+      >
+    </button>
+    <button color="primary" mat-mini-fab [matMenuTriggerFor]="menu">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <mat-menu #menu>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon><span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

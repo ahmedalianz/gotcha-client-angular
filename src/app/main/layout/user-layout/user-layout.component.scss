@@ -1,0 +1,14 @@
+.user-container {
+  display: flex;
+  padding: 1rem;
+  @media (min-width: 1024px) {
+    padding: 1rem 3rem;
+  }
+  .left,
+  .right {
+    padding: 1rem;
+  }
+  .right {
+    width: fill-available;
+  }
+}

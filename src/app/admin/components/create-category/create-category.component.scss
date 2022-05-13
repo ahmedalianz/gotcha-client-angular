@@ -1,0 +1,51 @@
+.buttons-box {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.file {
+  width: 180px;
+}
+.upload-button {
+  width: fit-content;
+  background-color: var(--main);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  .mat-icon {
+    color: white;
+  }
+}
+.upload-container {
+  input {
+    display: none;
+  }
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 5px;
+  }
+}
+.sub-categories-box {
+  display: flex;
+  flex-wrap: wrap;
+  button {
+    height: fit-content;
+  }
+  .sub-categories-item {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  .upload-container {
+    label {
+      margin-right: 10px;
+    }
+    display: flex;
+    justify-content: space-between;
+  }
+}

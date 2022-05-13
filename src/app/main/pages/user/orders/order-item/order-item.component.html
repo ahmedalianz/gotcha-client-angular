@@ -1,0 +1,116 @@
+<li>
+  <div class="main-details">
+    <div class="left">
+      <div class="order-info">
+        <div class="order-id">
+          <span>{{ orderItem._id }}</span>
+        </div>
+        <div class="order-date">
+          <span>Placed On {{ orderItem.date | date }}</span>
+        </div>
+      </div>
+      <div class="order-products">
+        <div class="thumbnail">
+          <img
+            *ngFor="let productItem of orderItem.products"
+            [src]="apiURL + productItem.product.mainImage"
+            alt="product name"
+          />
+        </div>
+        <div class="detail">
+          <div class="cart-options">
+            <div class="cart-option">
+              <mat-icon class="main-color">paid</mat-icon
+              ><span class="value">
+                {{ orderItem.price | currency: " " }}L.E
+              </span>
+            </div>
+            <div class="cart-option">
+              <mat-icon class="main-color">local_shipping</mat-icon
+              ><span class="value">
+                {{ orderItem.status }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <button mat-raised-button class="view" (click)="expand = !expand">
+        <mat-icon class="close-icon">find_in_page</mat-icon>
+        {{ expand ? "Less Details" : "More Details" }}
+      </button>
+      <button
+        *ngIf="orderItem.status !== 'Cancelled'"
+        mat-raised-button
+        color="warn"
+        (click)="changeOrderStatus('Cancelled')"
+      >
+        <mat-icon class="close-icon">close</mat-icon>Cancel Order</button
+      ><button
+        *ngIf="orderItem.status === 'Cancelled'"
+        mat-raised-button
+        (click)="changeOrderStatus('Ordered')"
+      >
+        <mat-icon class="close-icon">refresh</mat-icon>Order Again
+      </button>
+    </div>
+  </div>
+  <div class="expanded-details" [style.display]="expand ? 'flex' : 'none'">
+    <mat-card class="mat-elevation-z6 adress-card">
+      <h2>Delivery Address</h2>
+      <div class="delivery-adress">
+        <span>{{ orderItem.shipping.name }}</span>
+        <span>{{ orderItem.shipping.phone }}</span>
+        <div>
+          <span>{{ orderItem.shipping.adress.country }}</span> -
+          <span>{{ orderItem.shipping.adress.city }}</span>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="mat-elevation-z6 products-card">
+      <div class="product-item" *ngFor="let productItem of orderItem.products">
+        <div class="product-image">
+          <img
+            [src]="apiURL + productItem.product.mainImage"
+            alt="product name"
+          />
+        </div>
+        <div class="product-details">
+          <div
+            class="product-name"
+            routerLink="/products/{{ productItem.product._id }}"
+          >
+            <span
+              >{{ productItem.product.quantity }}
+              {{ productItem.product.shortName }}</span
+            >
+          </div>
+          <div class="product-price">
+            <span>{{ productItem.price | currency: " " }} L.E</span>
+          </div>
+          <div class="product-color">
+            <div [style.backgroundColor]="productItem.color"></div>
+          </div>
+          <div class="product-size">
+            <span>{{ productItem.size }}</span>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="mat-elevation-z6 price-card">
+      <div>
+        <span> SubTotal:</span
+        ><span> {{ orderItem.price | currency: " " }} L.E</span>
+      </div>
+      <div>
+        <span> Discount:</span><span>- {{ 0 | currency: " " }} L.E</span>
+      </div>
+      <div>
+        <span> Total:</span
+        ><span> {{ orderItem.price | currency: " " }} L.E</span>
+      </div>
+    </mat-card>
+  </div>
+</li>

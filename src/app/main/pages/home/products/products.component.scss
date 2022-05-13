@@ -1,0 +1,140 @@
+.all-products {
+  position: relative;
+
+  .pagination {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    button {
+      top: 50%;
+      position: absolute;
+      width: 45px;
+      min-width: auto;
+      padding: 0;
+      &.next {
+        right: 15px;
+      }
+      &.prev {
+        left: 15px;
+      }
+    }
+  }
+}
+.product {
+  position: relative;
+  text-align: center;
+  .product-back {
+    transition: 0.4s ease-in-out;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--main);
+    position: absolute;
+  }
+  .discount,
+  .best-seller {
+    position: absolute;
+    color: #fff;
+    z-index: 1;
+    padding: 5px;
+  }
+  .discount {
+    left: 2px;
+    top: 3px;
+    background-color: red;
+  }
+  .best-seller {
+    right: 5px;
+    top: 3px;
+    background-color: var(--main);
+  }
+  .product-back {
+    clip-path: polygon(100% 87%, 83% 100%, 100% 100%);
+  }
+  img {
+    padding-bottom: 20px;
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    object-position: center;
+  }
+  .product-info-box {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 225px;
+  }
+  .product-info {
+    .p-name {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 5px;
+      line-height: 2rem;
+      max-width: 80%;
+      margin: auto;
+      display: block;
+    }
+    .p-company {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    .star-rated {
+      color: var(--main);
+    }
+
+    .star-off {
+      color: grey;
+    }
+  }
+  .cart {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-weight: 700;
+    .options {
+      font-size: 12px;
+      color: var(--main);
+      letter-spacing: 0.045em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      .mat-icon {
+        transition: color 0.1s ease-in-out;
+        &:hover {
+          color: var(--lightmain);
+        }
+      }
+    }
+
+    .hasDiscount {
+      text-decoration: line-through;
+      color: grey;
+      font-size: 0.8rem;
+      margin-right: 5px;
+    }
+    .price {
+      font-size: 1.3rem;
+      line-height: 1.5;
+      color: #252525;
+    }
+  }
+  .colors {
+    width: 100%;
+    font-family: "PT Sans", sans-serif;
+    color: #828282;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .color {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      margin: 0 0.5rem;
+    }
+    .size-item {
+      margin: 0 5px;
+    }
+  }
+}

@@ -1,0 +1,161 @@
+.add-product-container {
+  width: 80vw;
+  max-width: 1200px;
+  min-width: 300px;
+  margin-top: 50px;
+  .button-container {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button {
+      width: 40%;
+    }
+  }
+  h1 {
+    font-size: 1rem;
+    @media (min-width: 1024px) {
+      font-size: 2rem;
+    }
+  }
+  .form-group-3 {
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 1024px) {
+      flex-direction: row;
+    }
+    .mat-form-field {
+      flex-direction: column;
+      @media (min-width: 1024px) {
+        margin-right: 100px;
+        width: 30%;
+      }
+    }
+  }
+  .form-group-2 {
+    display: flex;
+    justify-content: space-between;
+    @media (min-width: 1024px) {
+      justify-content: flex-start;
+    }
+    .mat-form-field {
+      width: 40%;
+      justify-content: space-between;
+      @media (min-width: 1024px) {
+        width: 30%;
+        margin-right: 100px;
+        justify-content: flex-start;
+      }
+    }
+  }
+  .smalls {
+    display: flex;
+    justify-content: space-between;
+    @media (min-width: 1024px) {
+      width: 50%;
+      justify-content: flex-start;
+    }
+    .mat-form-field {
+      width: 30%;
+      position: relative;
+
+      @media (min-width: 1024px) {
+        width: 25%;
+      }
+    }
+  }
+  .additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+  }
+  .discount-toggle {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    @media (min-width: 1024px) {
+      right: 50px;
+    }
+  }
+  .best-seller-toggle {
+    position: absolute;
+    right: 20px;
+    top: 50px;
+    @media (min-width: 1024px) {
+      top: 20px;
+      right: 180px;
+    }
+  }
+  .sizes-toggle {
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    @media (min-width: 1024px) {
+      top: 20px;
+      right: 300px;
+    }
+  }
+  .uploads {
+    display: flex;
+    flex-direction: column;
+    @media screen and (min-width: 1024px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .upload {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      @media screen and (min-width: 1024px) {
+        width: 15%;
+      }
+      &:first-child {
+        max-height: 180px;
+      }
+      &.multi {
+        @media screen and (min-width: 1024px) {
+          width: 75%;
+          align-items: flex-start;
+        }
+      }
+      .upload-button {
+        width: fit-content;
+        background-color: var(--main);
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        border-radius: 5px;
+        .mat-icon {
+          color: white;
+        }
+      }
+      input {
+        display: none;
+      }
+      .preview-container {
+        display: flex;
+        flex-wrap: wrap;
+        .img-container {
+          margin-right: 12px;
+          position: relative;
+          button {
+            position: absolute;
+            right: -16px;
+            z-index: 1;
+            top: -16px;
+          }
+        }
+        img {
+          width: 110px;
+          height: 110px;
+          object-fit: contain;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}

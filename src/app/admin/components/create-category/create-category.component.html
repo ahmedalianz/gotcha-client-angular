@@ -1,0 +1,43 @@
+<form [formGroup]="categoryForm" (ngSubmit)="createCategory()">
+  <mat-form-field>
+    <mat-label>Category Name</mat-label>
+    <input matInput type="text" formControlName="name" />
+  </mat-form-field>
+  <div formArrayName="subCategories" class="sub-categories-box">
+    <div
+      class="sub-categories-item"
+      *ngFor="let category of subCategories.controls; let i = index"
+    >
+      <mat-form-field>
+        <mat-label>SubCategory {{ i + 1 }}</mat-label>
+        <input matInput type="text" [formControlName]="i" />
+      </mat-form-field>
+
+      <button mat-mini-fab color="accent" (click)="removeCategory(i)">
+        <mat-icon>remove</mat-icon>
+      </button>
+    </div>
+    <button
+      mat-raised-button
+      type="button"
+      color="primary"
+      (click)="addCategory()"
+    >
+      <mat-icon>add</mat-icon>
+      Add SubCategory
+    </button>
+  </div>
+  <div class="buttons-box">
+    <button
+      mat-raised-button
+      color="accent"
+      type="button"
+      (click)="closeDialouge()"
+    >
+      Cancel
+    </button>
+    <button [disabled]="name?.value === ''" mat-raised-button color="primary">
+      Create
+    </button>
+  </div>
+</form>

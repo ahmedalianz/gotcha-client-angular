@@ -1,0 +1,49 @@
+<div class="navbar">
+  <mat-toolbar>
+    <div class="navbar-logo" routerLink="/">
+      <img src="assets/images/logo/Gotcha2.png" alt="logo" />
+    </div>
+    <div class="navbar-searchbar">
+      <mat-icon *ngIf="search !== ''" class="close-icon" (click)="search = ''"
+        >close</mat-icon
+      >
+      <input placeholder="What are you looking for ? " [(ngModel)]="search" />
+    </div>
+    <div>
+      <span *ngIf="!_auth.isAuthed; else userAuthed">
+        <button routerLink="/login" mat-button aria-label="login">
+          Log In <mat-icon>login</mat-icon>
+        </button>
+      </span>
+      <ng-template #userAuthed>
+        <div class="d-flex">
+          <mat-icon
+            routerLink="/cart"
+            matBadge="{{ _cart.cartData.length }}"
+            matBadgePosition="before"
+            matBadgeColor="warn"
+            class="cart"
+            >shopping_basket</mat-icon
+          >
+          <mat-icon class="cart" [matMenuTriggerFor]="menu">menu</mat-icon>
+        </div>
+
+        <mat-menu #menu>
+          <button mat-menu-item routerLink="/user/profile">
+            <mat-icon class="cart">person</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item routerLink="/user/orders">
+            <mat-icon class="cart">assignment</mat-icon>
+            <span>Orders</span>
+          </button>
+
+          <button mat-menu-item (click)="logout()">
+            <mat-icon class="cart">logout</mat-icon><span>Logout</span>
+          </button>
+        </mat-menu>
+      </ng-template>
+    </div>
+  </mat-toolbar>
+</div>
+<app-nav-categories></app-nav-categories>

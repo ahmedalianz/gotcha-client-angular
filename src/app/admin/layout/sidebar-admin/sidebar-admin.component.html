@@ -1,0 +1,59 @@
+<div class="sidebar">
+  <div class="sidebar_user_info">
+    <div class="user_profle">
+      <div class="user_img">
+        <img [src]="apiURL + this._user.userData.profilePic" alt="#" />
+      </div>
+      <div class="user_info">
+        <h2>{{ _user.userData.name }}</h2>
+        <h5 class="text-center">- {{ _user.userData.position }}</h5>
+      </div>
+    </div>
+    <div class="upload-container">
+      <div>
+        <label for="file-upload"
+          ><div class="btn2 upload-button">
+            <mat-icon>perm_media</mat-icon><span> Change Photo</span>
+          </div>
+          <input
+            type="file"
+            accept="image/*"
+            id="file-upload"
+            (change)="onFileSelected($event)"
+          />
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <mat-list role="list" class="list">
+    <mat-list-item
+      role="listitem"
+      class="listitem"
+      (click)="navigateTo('/admin/products')"
+    >
+      <mat-icon>widgets</mat-icon><span> Products</span>
+    </mat-list-item>
+    <mat-list-item
+      role="listitem"
+      class="listitem"
+      (click)="navigateTo('/admin/orders')"
+    >
+      <mat-icon>pending_actions</mat-icon><span> Orders</span>
+    </mat-list-item>
+    <mat-list-item
+      role="listitem"
+      class="listitem"
+      (click)="navigateTo('/admin/admins')"
+    >
+      <mat-icon>admin_panel_settings</mat-icon><span>Admins</span>
+    </mat-list-item>
+    <mat-list-item
+      role="listitem"
+      class="listitem"
+      (click)="navigateTo('/admin/users')"
+    >
+      <mat-icon>group</mat-icon><span>Users</span>
+    </mat-list-item>
+  </mat-list>
+</div>

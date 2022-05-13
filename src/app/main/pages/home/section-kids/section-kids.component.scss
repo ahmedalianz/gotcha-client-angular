@@ -1,0 +1,107 @@
+.kids {
+  padding: 2rem;
+  background-color: rgb(233, 233, 233);
+
+  @media (min-width: 1024px) {
+    padding: 2rem 3rem;
+  }
+  &.men {
+    position: relative;
+    .side-image {
+      width: 450px;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+  &.women {
+    position: relative;
+    .side-image {
+      width: 500px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+  .title {
+    font-size: 4rem;
+    font-weight: bold;
+    color: white;
+    background-color: var(--main);
+    padding: 2rem;
+    width: max-content;
+    text-align: center;
+    margin: 0 auto 1rem;
+  }
+  .top {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    img {
+      width: 100%;
+      border-radius: 5px;
+      object-fit: cover;
+      object-position: top;
+      height: 480px;
+    }
+
+    .boys {
+      margin-right: 0.5rem;
+    }
+    .girls {
+      margin-left: 0.5rem;
+      .caption {
+        background-color: rgb(230, 89, 159);
+      }
+    }
+    .boys,
+    .girls {
+      position: relative;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    .caption {
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      font-size: 4rem;
+      font-weight: bold;
+      color: white;
+      background-color: rgb(20, 175, 222);
+      padding: 2rem;
+      width: -webkit-fill-available;
+      width: fill-available;
+      text-align: center;
+    }
+  }
+  .categories {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, 150px);
+    place-content: center;
+    padding: 2rem 0;
+    position: relative;
+    z-index: 1;
+    .category-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        transform: scale(1.1);
+      }
+      .name {
+        font-weight: bold;
+      }
+      img {
+        width: 100%;
+        height: 150px;
+        object-fit: contain;
+        background-color: var(--lightmain);
+        border-radius: 5px;
+      }
+    }
+  }
+}

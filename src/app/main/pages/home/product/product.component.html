@@ -1,0 +1,87 @@
+<mat-card class="product" routerLink="/products/{{ product._id }}">
+  <div class="product-back"></div>
+  <span *ngIf="product.discount?.active" class="discount"
+    >{{ product.discount?.percentage }}% Discount</span
+  >
+  <span *ngIf="product.bestSeller" class="best-seller">Best seller</span>
+  <img [src]="apiURL + product.mainImage" alt="" />
+  <div class="product-info-box">
+    <div class="product-info">
+      <span class="p-name">{{ product.shortName }}</span>
+      <span class="p-company">{{ product.brand }}</span>
+      <div class="ratings">
+        <div class="list-start">
+          <span
+            class="list-start-item"
+            *ngFor="let rating of createRange(totalRating, product)"
+          >
+            <mat-icon class="star-rated">star</mat-icon>
+          </span>
+          <span
+            class="list-start-item"
+            *ngFor="let rating of createRange(5 - totalRating, product)"
+          >
+            <mat-icon class="star-off">star</mat-icon>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="colors" *ngIf="product.colors.length && colorsVisible">
+        Colors :
+        <div
+          class="color"
+          [style.backgroundColor]="color"
+          *ngFor="let color of product.colors.slice(0, 3)"
+        ></div>
+      </div>
+      <div class="colors sizes" *ngIf="product.sizes.length && sizesVisible">
+        Sizes :
+        <div class="size-item" *ngFor="let size of product.sizes.slice(0, 2)">
+          {{ size }}
+        </div>
+      </div>
+      <div class="cart">
+        <span class="price">
+          <span *ngIf="product.discount?.active"
+            >{{ discountPrice | currency: " " }} L.E</span
+          ><span [class]="product.discount?.active ? 'hasDiscount' : ''">
+            {{ product.price | currency: " " }} L.E</span
+          >
+        </span>
+
+        <div class="options">
+          <button
+            routerLink="/products/{{ product._id }}"
+            mat-icon-button
+            matTooltip="Show This Product"
+            [matTooltipPosition]="'below'"
+            matTooltipHideDelay="100"
+          >
+            <mat-icon> info </mat-icon>
+          </button>
+          <button
+            (mouseover)="colorsVisible = true; sizesVisible = false"
+            mat-icon-button
+            matTooltip="Colors"
+            [matTooltipPosition]="'below'"
+            matTooltipHideDelay="100"
+            class="option-colors"
+          >
+            <mat-icon> palette </mat-icon>
+          </button>
+          <button
+            (mouseover)="sizesVisible = true; colorsVisible = false"
+            (mouseleave)="sizesVisible = false; colorsVisible = true"
+            mat-icon-button
+            matTooltip="Sizes"
+            [matTooltipPosition]="'below'"
+            matTooltipHideDelay="100"
+          >
+            <mat-icon>straighten </mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>

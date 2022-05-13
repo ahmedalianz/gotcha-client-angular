@@ -1,0 +1,53 @@
+<div class="nav-categories" *ngIf="_products.categoriesLoaded">
+  <div class="nav-categories-all-categories">
+    <span class="title">All Categories</span>
+    <mat-icon>arrow_drop_down</mat-icon>
+    <div class="menu">
+      <div class="left">
+        <span
+          *ngFor="let category of categories"
+          (mouseover)="setSubCategories(category)"
+          >{{ category.name }}</span
+        >
+      </div>
+      <div class="right">
+        <div class="column">
+          <span *ngFor="let sub_category of sub_categories.slice(0, 12)">
+            {{ sub_category.name }}</span
+          >
+        </div>
+        <div class="column">
+          <span *ngFor="let sub_category of sub_categories.slice(12, 24)">{{
+            sub_category.name
+          }}</span>
+        </div>
+        <div class="column">
+          <span *ngFor="let sub_category of sub_categories.slice(24, 36)">{{
+            sub_category.name
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="nav-categories-list"
+    *ngIf="_products.categories.length; else elseBlock"
+  >
+    <span *ngFor="let category of categories.slice(0, 8)">{{
+      category.name
+    }}</span>
+    <span>deals</span>
+  </div>
+  <ng-template #elseBlock>
+    <div>
+      <span>electronics</span>
+      <span>mobiles</span>
+      <span>men</span>
+      <span>women</span>
+      <span>Home</span>
+      <span>beauty & Health</span>
+      <span>baby & toys</span>
+      <span>super market</span>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,168 @@
+<section class="product-details" *ngIf="isLoaded; else elseBlock">
+  <mat-card class="main-info">
+    <div class="left">
+      <swiper
+        [grabCursor]="true"
+        [loop]="true"
+        [navigation]="true"
+        [effect]="'flip'"
+        [thumbs]="{ swiper: thumbsSwiper }"
+        [autoplay]="{
+          delay: 2500,
+          disableOnInteraction: false
+        }"
+        class="mainSwiper"
+      >
+        <ng-template swiperSlide class="mySlide">
+          <img [src]="apiURL + product.mainImage" />
+        </ng-template>
+        <ng-template
+          *ngFor="let slide of product.images"
+          swiperSlide
+          class="mySlide"
+        >
+          <img [src]="apiURL + slide" />
+        </ng-template>
+      </swiper>
+      <swiper
+        (swiper)="thumbsSwiper = $event"
+        [spaceBetween]="10"
+        [slidesPerView]="4"
+        [loop]="true"
+        [freeMode]="true"
+        [watchSlidesProgress]="true"
+        class="thumbSwiper"
+      >
+        <ng-template swiperSlide class="jj">
+          <img [src]="apiURL + product.mainImage" />
+        </ng-template>
+        <ng-template *ngFor="let slide of product.images" swiperSlide>
+          <img [src]="apiURL + slide" /> </ng-template
+      ></swiper>
+    </div>
+    <div class="right">
+      <h2 class="name">{{ product.longName }}</h2>
+      <div class="ratings">
+        <div class="list-start">
+          <span
+            class="list-start-item"
+            *ngFor="let rating of createRange(totalRating)"
+          >
+            <mat-icon class="star-rated">star</mat-icon>
+          </span>
+          <span
+            class="list-start-item"
+            *ngFor="let rating of createRange(5 - totalRating)"
+          >
+            <mat-icon class="star-off">star</mat-icon>
+          </span>
+        </div>
+      </div>
+      <div class="stock">
+        <h3 class="in" *ngIf="product.inventoryQuantity > 0">
+          In Stock ({{ product.inventoryQuantity }})
+        </h3>
+        <h3 class="out" *ngIf="product.inventoryQuantity === 0">
+          Out Of Stock
+        </h3>
+      </div>
+      <div class="price-colors">
+        <div class="price">
+          <p class="price-currency">
+            <span *ngIf="product.discount?.active" class="discount-price">
+              {{ discountPrice | currency: " " }} L.E</span
+            ><span [class]="product.discount?.active ? 'hasDiscount' : ''">
+              {{ product.price | currency: " " }} L.E
+            </span>
+          </p>
+          <p class="price-shipping">Shipping and taxes Not Included</p>
+        </div>
+        <div class="colors" *ngIf="product.colors.length">
+          <div class="block_goodColor">
+            <span class="text_specification">Pick your favorite color:</span>
+            <div class="block_goodColor__allColors">
+              <span *ngFor="let color of product.colors; let i = index">
+                <input
+                  type="radio"
+                  name="colorOfItem"
+                  class="radio_button"
+                  [id]="color"
+                  [checked]="i === 0"
+                  [value]="color"
+                  (change)="changeColor(color)"
+                />
+                <label
+                  [for]="color"
+                  class="block_goodColor__radio"
+                  [style.backgroundColor]="color"
+                ></label>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sizes" *ngIf="product.sizes.length">
+        <label>Pick your size</label>
+        <mat-radio-group
+          aria-labelledby="pick size"
+          class="sizes-group"
+          [(ngModel)]="size"
+        >
+          <mat-radio-button
+            color="primary"
+            class="size-option"
+            *ngFor="let size of product.sizes; let i = index"
+            [value]="size"
+            [checked]="i === 0"
+            (change)="changeSize(size)"
+          >
+            {{ size }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="quantity-add">
+        <div class="quantity">
+          <span class="text_specification">Quantity</span>
+          <div class="quantity__chooseBlock">
+            <input
+              [(ngModel)]="quantity"
+              class="quantity__number"
+              name="quantityNumber"
+              type="number"
+              min="1"
+              [max]="product.inventoryQuantity"
+              (blur)="checkQuantity()"
+            />
+          </div>
+        </div>
+
+        <button
+          class="add-to-cart"
+          mat-raised-button
+          (click)="addToCart(product._id)"
+          [disabled]="product.inventoryQuantity === 0 || AddingToCart"
+        >
+          <span *ngIf="!AddingToCart">Add To Cart</span>
+          <img *ngIf="AddingToCart" src="/assets/images/loading2.gif" alt="" />
+        </button>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="sub-info">
+    <div class="description">
+      <h2 class="title">Details</h2>
+      <div class="content" [innerHTML]="product.description"></div>
+    </div>
+    <div class="specifications">
+      <h2 class="title">Specifications</h2>
+      <div class="content" [innerHTML]="product.specifications"></div>
+    </div>
+  </mat-card>
+  <app-review [product]="product"></app-review>
+</section>
+<ng-template #elseBlock>
+  <div class="spinner-box">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

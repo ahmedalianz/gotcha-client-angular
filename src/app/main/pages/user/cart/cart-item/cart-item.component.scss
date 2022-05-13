@@ -1,0 +1,114 @@
+li {
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  overflow: auto;
+  width: 100%;
+  display: flex;
+  .left {
+    width: 70%;
+    display: flex;
+    .thumbnail {
+      img {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+      }
+    }
+    .detail {
+      padding: 0 0.5rem;
+      line-height: 2.2rem;
+      .name {
+        font-size: 1.2rem;
+      }
+      .cart-options {
+        display: flex;
+        flex-direction: column;
+        .cart-option {
+          font-size: 1rem;
+          display: flex;
+          align-items: center;
+          .value {
+            margin: 0 0.5rem;
+            .color {
+              width: 20px;
+              height: 20px;
+              border-radius: 4px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .right {
+    display: flex;
+    width: 30%;
+    justify-content: center;
+    align-items: center;
+    .quantity,
+    .remove {
+      width: 50%;
+      text-align: center;
+    }
+    .quantity {
+      input {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        position: relative;
+        left: calc(50% - 30px);
+        background: #fff;
+        border: 2px solid #ddd;
+        color: #7f7f7f;
+        text-align: center;
+        font: 600 1.5rem Helvetica, Arial, sans-serif;
+        &:focus,
+        &:hover {
+          border-color: var(--main);
+        }
+      }
+      button {
+        color: white;
+        display: none;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        top: -40px;
+        right: 0;
+        font-size: 1.1rem;
+        outline: none;
+        transform: translateY(-1px);
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        padding: 7px;
+        background-color: var(--lightmain);
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          background-color: var(--main);
+        }
+        &.show {
+          display: flex;
+          opacity: 0;
+          animation: show 0.5s ease-in-out forwards;
+          @keyframes show {
+            to {
+              opacity: 1;
+              top: 0;
+            }
+          }
+        }
+      }
+    }
+    .remove {
+      .close-icon {
+        transition: color 150ms linear;
+        cursor: pointer;
+      }
+
+      .close-icon:hover {
+        color: var(--main);
+      }
+    }
+  }
+}

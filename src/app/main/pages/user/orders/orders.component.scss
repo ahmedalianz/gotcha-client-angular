@@ -1,0 +1,54 @@
+.products-container {
+  max-width: 1200px;
+  min-width: 300px;
+  margin: 0 auto;
+  height: 100%;
+  .cart-container {
+    position: relative;
+    min-height: 400px;
+
+    .card-back-empty {
+      background: url(/assets/images/cartempty.png) no-repeat;
+      background-color: white;
+      background-size: contain;
+      background-position: center;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
+.container {
+  overflow: auto;
+  /* --- HEADER --- */
+  header.container {
+    margin-bottom: 1.5rem;
+  }
+
+  header .count {
+    display: flex;
+    justify-content: flex-end;
+    color: #333333;
+    line-height: 20px;
+  }
+
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+    border-radius: 4px;
+  }
+  /* --- PRODUCT LIST --- */
+  .products {
+    border-top: 1px solid #ddd;
+  }
+
+  .empty-product button {
+    font-size: 1.3rem;
+    padding: 10px 30px;
+    border-radius: 5px;
+  }
+}

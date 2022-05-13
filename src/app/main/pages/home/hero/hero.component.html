@@ -1,0 +1,14 @@
+<swiper
+  [grabCursor]="true"
+  [loop]="true"
+  [autoplay]="{
+    delay: 2500,
+    disableOnInteraction: false
+  }"
+  class="mainSwiper"
+  [style.height]="height"
+>
+  <ng-template *ngFor="let slide of slides" swiperSlide class="mySlide">
+    <img [src]="slide" />
+  </ng-template>
+</swiper>

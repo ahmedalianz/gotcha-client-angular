@@ -1,0 +1,33 @@
+<mat-card class="sidebar">
+  <div class="sidebar-back"></div>
+  <div class="sidebar-back-white"></div>
+  <div class="widget user">
+    <!-- User Image -->
+    <img [src]="apiURL + _auth.userData.profilePic" alt="" />
+    <!-- User Name -->
+    <div class="user-name">Hello {{ _auth.userData.name }}</div>
+    <div class="user-email">{{ _auth.userData.email }}</div>
+  </div>
+  <div class="widget links">
+    <ul>
+      <li>
+        <a routerLink="/user/profile"
+          ><mat-icon class="main-color">person</mat-icon> Profile</a
+        >
+      </li>
+      <li>
+        <a routerLink="/user/orders"
+          ><mat-icon class="main-color">assignment</mat-icon> Orders</a
+        >
+      </li>
+      <li>
+        <a routerLink="/user/wishlist"
+          ><mat-icon class="main-color">favorite</mat-icon> WishList</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div class="widget">
+    <button (click)="logout()" mat-raised-button color="warn">Logout</button>
+  </div>
+</mat-card>

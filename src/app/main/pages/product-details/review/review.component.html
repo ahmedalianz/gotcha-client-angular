@@ -1,0 +1,166 @@
+<mat-card class="reviews">
+  <h2 class="title">Customers Feedback</h2>
+  <div class="reviews-box">
+    <div class="left">
+      <div class="rating">
+        <div>{{ totalRating }} / 5</div>
+        <div class="starts">
+          <mat-icon
+            *ngFor="let rating of createRange(totalRating)"
+            class="star-on"
+            >star</mat-icon
+          >
+          <mat-icon
+            *ngFor="let rating of createRange(5 - totalRating)"
+            class="star-off"
+            >star</mat-icon
+          >
+        </div>
+        <div class="rating-count">{{ reviews.length }} Reviews</div>
+      </div>
+      <div class="stars-devider">
+        <div class="rating-part">
+          <span
+            >5 <mat-icon class="star-rated">star</mat-icon> ({{
+              getStars(5)
+            }})</span
+          ><mat-progress-bar
+            mode="determinate"
+            value="{{ (getStars(5) * 100) / reviews.length }}"
+          ></mat-progress-bar>
+        </div>
+        <div class="rating-part">
+          <span
+            >4 <mat-icon class="star-rated">star</mat-icon> ({{
+              getStars(4)
+            }})</span
+          ><mat-progress-bar
+            mode="determinate"
+            value="{{ (getStars(4) * 100) / reviews.length }}"
+          ></mat-progress-bar>
+        </div>
+        <div class="rating-part">
+          <span
+            >3 <mat-icon class="star-rated">star</mat-icon> ({{
+              getStars(3)
+            }})</span
+          ><mat-progress-bar
+            mode="determinate"
+            value="{{ (getStars(3) * 100) / reviews.length }}"
+          ></mat-progress-bar>
+        </div>
+        <div class="rating-part">
+          <span
+            >2 <mat-icon class="star-rated">star</mat-icon> ({{
+              getStars(2)
+            }})</span
+          ><mat-progress-bar
+            mode="determinate"
+            value="{{ (getStars(2) * 100) / reviews.length }}"
+          ></mat-progress-bar>
+        </div>
+        <div class="rating-part">
+          <span
+            >1 <mat-icon class="star-rated">star</mat-icon> ({{
+              getStars(1)
+            }})</span
+          ><mat-progress-bar
+            mode="determinate"
+            value="{{ (getStars(1) * 100) / reviews.length }}"
+          ></mat-progress-bar>
+        </div>
+      </div>
+    </div>
+    <div class="right" *ngIf="product.reviewsRatings.length">
+      <div class="sub-title">Comments From Trusted Buyers</div>
+      <mat-card class="mat-elevation-z3" *ngFor="let review of viewdReviews">
+        <div class="top">
+          <div class="image-name-rate">
+            <img
+              class="avatar"
+              [src]="apiURL + review.user.profilePic"
+              alt="avater"
+            />
+            <div>
+              <h5>{{ review.user.name }}</h5>
+              <div class="ratings">
+                <div class="list-start">
+                  <span
+                    class="list-start-item"
+                    *ngFor="let rating of createRange(review.rate)"
+                  >
+                    <mat-icon class="star-rated">star</mat-icon>
+                  </span>
+                  <span
+                    class="list-start-item"
+                    *ngFor="let rating of createRange(5 - review.rate)"
+                  >
+                    <mat-icon class="star-off">star</mat-icon>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small>{{ review.date | date }}</small>
+        </div>
+
+        <div class="review-comment">
+          <p>
+            {{ review.message }}
+          </p>
+        </div>
+      </mat-card>
+      <div class="pagination">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="page === 1"
+          (click)="paginate(-1)"
+        >
+          <mat-icon>skip_previous</mat-icon>
+        </button>
+
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="page === finalPage"
+          (click)="paginate(1)"
+        >
+          <mat-icon>skip_next</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="review-submission">
+    <h3 class="review-submission-title">Review This Product</h3>
+    <div class="rate">
+      <star-rating
+        class="star-rating"
+        [value]="0"
+        [totalstars]="5"
+        checkedcolor="#420188"
+        uncheckedcolor="gray"
+        size="30px"
+        [readonly]="false"
+        (rate)="onRate($event)"
+      ></star-rating>
+    </div>
+    <form [formGroup]="reviewForm" (ngSubmit)="addReview()">
+      <mat-form-field appearance="fill">
+        <mat-label>Write Your Review Here</mat-label>
+        <textarea
+          matInput
+          formControlName="message"
+          rows="10"
+          class="form-control"
+        ></textarea>
+      </mat-form-field>
+
+      <div class="button-box">
+        <button [disabled]="isSubmitted" type="submit" class="btn btn-main">
+          Sumbit
+        </button>
+      </div>
+    </form>
+  </div>
+</mat-card>

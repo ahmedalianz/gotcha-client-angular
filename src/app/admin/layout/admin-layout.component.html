@@ -1,0 +1,22 @@
+<mat-drawer-container
+  class="example-container"
+  autosize
+  hasBackdrop="true"
+  *ngIf="!_user.userDataLoading; else elseBlock"
+>
+  <mat-drawer #drawer mode="over" class="example-sidenav">
+    <app-sidebar-admin [drawer]="drawer"></app-sidebar-admin>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <app-topbar [drawer]="drawer"></app-topbar>
+    <div class="inside-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</mat-drawer-container>
+<ng-template #elseBlock>
+  <div class="spinner-box">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

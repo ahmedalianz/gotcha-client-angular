@@ -1,0 +1,21 @@
+<section class="all-products" *ngIf="!loading; else elseBlock">
+  <h2>{{ title }}</h2>
+
+  <swiper
+    [grabCursor]="true"
+    [loop]="true"
+    [navigation]="true"
+    [slidesPerView]="products.length > 5 ? 5 : products.length"
+    [spaceBetween]="10"
+    class="mySwiper"
+  >
+    <ng-template swiperSlide *ngFor="let product of products">
+      <app-product [product]="product"></app-product>
+    </ng-template>
+  </swiper>
+</section>
+<ng-template #elseBlock>
+  <div class="spinner-box">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

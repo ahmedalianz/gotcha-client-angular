@@ -1,0 +1,25 @@
+.brands {
+  padding: 1rem;
+  @media screen and (min-width: 1024px) {
+    padding: 1rem 3rem;
+  }
+  .title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 4rem;
+    line-height: 2;
+    letter-spacing: 0.1rem;
+    color: var(--main);
+  }
+  &-box {
+    margin: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+    gap: 1rem;
+    place-content: center;
+    place-items: center;
+    img {
+      width: 100%;
+    }
+  }
+}
